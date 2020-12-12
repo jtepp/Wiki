@@ -3,11 +3,11 @@ Using Swift's Natural Language library to connect Wikipedia pages
 
 Make sure you initiate it with two arguments
 
-Example:
+## Example:
 
-$ wiki Einstein Radiology
+wiki Einstein Radiology
 
-Example response:
+## Example response:
 
 Einstein -> Radiology
 1. Philosophy of psychiatry:   0.8062679767608643
