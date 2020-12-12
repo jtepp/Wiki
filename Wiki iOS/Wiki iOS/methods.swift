@@ -1,5 +1,5 @@
 //
-//  main.swift
+//  methods.swift
 //  wiki
 //
 //  Created by Jacob Tepperman on 2020-12-11.

@@ -21,7 +21,7 @@ struct ContentView: View {
 				output = "\(start) -> \(end)"
 			} else {
 				going = true
-//				wick(start: start, end: end, output: $output).begin()
+				wick(start: start, end: end, output: $output).begin()
 			}
 		} label:{
 			Text("Begin")
