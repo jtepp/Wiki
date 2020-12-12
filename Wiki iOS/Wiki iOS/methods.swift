@@ -69,13 +69,12 @@ struct wick {
 	let e = NLEmbedding.sentenceEmbedding(for: .english)!
 	let start: String
 	let end: String
-	@State var pastWords = [String]()
-	@State var pastWordsCased = [String]()
 	@Binding var output: String
 	func begin(){
+
 		var currentWord = start
-		pastWords.append(start.lowercased())
-		pastWordsCased.append(start)
+		var pastWords = [start.lowercased()]
+		var pastWordsCased = [start]
 		print("\(start) -> \(end)")
 		while currentWord.lowercased() != end.lowercased()  {
 			
@@ -98,11 +97,14 @@ struct wick {
 				similarity = e.distance(between: end, and: best, distanceType: .cosine)
 			}
 			print("\(pastWords.count). \(best):   \(similarity)" + (guess ? " [guessed]":""))
+			output += "\(pastWords.count). \(best):   \(similarity)" + (guess ? " [guessed]":"")+"\n"
 			currentWord = best
 			pastWords.append(best.lowercased())
 			pastWordsCased.append(best)
-			output += "\(pastWords.count). \(best):   \(similarity)" + (guess ? " [guessed]":"")+"\n"
+			
 		}
+		output += "Done!"
 		
 	}
 }
+
