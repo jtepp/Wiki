@@ -69,22 +69,28 @@ struct wick {
 	let e = NLEmbedding.sentenceEmbedding(for: .english)!
 	let start: String
 	let end: String
+	@Binding var pastWordsCased: [String]
 	@Binding var output: String
+	@Binding var going: Bool
 	func begin(){
+		going = true
+		DispatchQueue.global(qos: .background).async {
 
 		var currentWord = start
 		var pastWords = [start.lowercased()]
-		var pastWordsCased = [start]
+		pastWordsCased = [start]
 		print("\(start) -> \(end)")
 		while currentWord.lowercased() != end.lowercased()  {
 			
+//			print("iteration")
 			let links = matches(for: "/wiki/((?!File:)(?![A-Za-z]+:[A-Za-z]).+?)\"", in: getHTML(word:currentWord))
 			var similarity = 2.0
 			var guess = false
 			var best = ""
 			
-			links.forEach{ link in
-				let keyWord = prep(w:link)
+			(0..<(links.count > 100 ? 100: links.count)).forEach{ i in
+				let keyWord = prep(w:links[i])
+				
 				let d = e.distance(between: end, and: keyWord, distanceType: .cosine)
 				if d < similarity && !pastWords.contains(keyWord.lowercased()) {
 					similarity = d
@@ -96,6 +102,7 @@ struct wick {
 				best = prep(w:links.randomElement()!)
 				similarity = e.distance(between: end, and: best, distanceType: .cosine)
 			}
+//			print(best)
 			print("\(pastWords.count). \(best):   \(similarity)" + (guess ? " [guessed]":""))
 			output += "\(pastWords.count). \(best):   \(similarity)" + (guess ? " [guessed]":"")+"\n"
 			currentWord = best
@@ -104,7 +111,8 @@ struct wick {
 			
 		}
 		output += "Done!"
-		
+			going = false
+		}
 	}
 }
 
