@@ -15,8 +15,8 @@
 		0C77D9602585293200915965 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C77D9352585292F00915965 /* ContentView.swift */; };
 		0C77D9612585293200915965 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C77D9362585293100915965 /* Assets.xcassets */; };
 		0C77D9622585293200915965 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C77D9362585293100915965 /* Assets.xcassets */; };
-		0C77D9762585294B00915965 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C77D9752585294B00915965 /* main.swift */; };
-		0C77D9772585294B00915965 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C77D9752585294B00915965 /* main.swift */; };
+		0C77D99325852B7E00915965 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C77D99225852B7E00915965 /* main.swift */; };
+		0C77D99425852B7E00915965 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C77D99225852B7E00915965 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,7 @@
 		0C77D9562585293100915965 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C77D95A2585293100915965 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		0C77D95C2585293100915965 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0C77D9752585294B00915965 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = ../../wiki/main.swift; sourceTree = "<group>"; };
+		0C77D99225852B7E00915965 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +101,9 @@
 		0C77D9332585292F00915965 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				0C77D99225852B7E00915965 /* main.swift */,
 				0C77D9342585292F00915965 /* WIki_iOSApp.swift */,
 				0C77D9352585292F00915965 /* ContentView.swift */,
-				0C77D9752585294B00915965 /* main.swift */,
 				0C77D9362585293100915965 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -314,7 +314,7 @@
 			files = (
 				0C77D95F2585293200915965 /* ContentView.swift in Sources */,
 				0C77D95D2585293100915965 /* WIki_iOSApp.swift in Sources */,
-				0C77D9762585294B00915965 /* main.swift in Sources */,
+				0C77D99325852B7E00915965 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +324,7 @@
 			files = (
 				0C77D9602585293200915965 /* ContentView.swift in Sources */,
 				0C77D95E2585293100915965 /* WIki_iOSApp.swift in Sources */,
-				0C77D9772585294B00915965 /* main.swift in Sources */,
+				0C77D99425852B7E00915965 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

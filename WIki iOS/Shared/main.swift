@@ -7,43 +7,14 @@
 
 import Foundation
 import NaturalLanguage
+import SwiftUI
 
 //#########################
-let start = CommandLine.arguments[1]
-let end = CommandLine.arguments[2]
+//let start = CommandLine.arguments[1]
+//let end = CommandLine.arguments[2]
 //#########################
-let e = NLEmbedding.sentenceEmbedding(for: .english)!
-var currentWord = start
-var pastWords = [start.lowercased()]
-var pastWordsCased = [start]
+
 //print("Starting from \(start)")
-print("\(start) -> \(end)")
-while currentWord.lowercased() != end.lowercased() {
-	
-	let links = matches(for: "/wiki/((?!File:)(?![A-Za-z]+:[A-Za-z]).+?)\"", in: getHTML(word:currentWord))
-	var similarity = 2.0
-	var guess = false
-	var best = ""
-
-	links.forEach{ link in
-		let keyWord = prep(w:link)
-		let d = e.distance(between: end, and: keyWord, distanceType: .cosine)
-		if d < similarity && !pastWords.contains(keyWord.lowercased()) {
-			similarity = d
-			best = keyWord
-		}
-	}
-	if similarity > 1.1 {
-		guess = true
-		best = prep(w:links.randomElement()!)
-		similarity = e.distance(between: end, and: best, distanceType: .cosine)
-	}
-	print("\(pastWords.count). \(best):   \(similarity)" + (guess ? " [guessed]":""))
-	currentWord = best
-	pastWords.append(best.lowercased())
-	pastWordsCased.append(best)
-}
-
 //print("Path from \(start) -> \(end) in \(pastWords.count) steps:\n> "+pastWordsCased.joined(separator: "\n> "))
 
 func getHTML(word:String) -> String{
@@ -56,7 +27,7 @@ func getHTML(word:String) -> String{
 	} catch let error {
 		return "\(error.localizedDescription)"
 	}
-
+	
 }
 
 
@@ -94,3 +65,44 @@ func unprep(w:String) -> String {
 	return w.replacingOccurrences(of:" ", with: "_")
 }
 
+struct wick {
+	let e = NLEmbedding.sentenceEmbedding(for: .english)!
+	let start: String
+	let end: String
+	@State var pastWords = [String]()
+	@State var pastWordsCased = [String]()
+	@Binding var output: String
+	func begin(){
+		var currentWord = start
+		pastWords.append(start.lowercased())
+		pastWordsCased.append(start)
+		print("\(start) -> \(end)")
+		while currentWord.lowercased() != end.lowercased()  {
+			
+			let links = matches(for: "/wiki/((?!File:)(?![A-Za-z]+:[A-Za-z]).+?)\"", in: getHTML(word:currentWord))
+			var similarity = 2.0
+			var guess = false
+			var best = ""
+			
+			links.forEach{ link in
+				let keyWord = prep(w:link)
+				let d = e.distance(between: end, and: keyWord, distanceType: .cosine)
+				if d < similarity && !pastWords.contains(keyWord.lowercased()) {
+					similarity = d
+					best = keyWord
+				}
+			}
+			if similarity > 1.1 {
+				guess = true
+				best = prep(w:links.randomElement()!)
+				similarity = e.distance(between: end, and: best, distanceType: .cosine)
+			}
+			print("\(pastWords.count). \(best):   \(similarity)" + (guess ? " [guessed]":""))
+			currentWord = best
+			pastWords.append(best.lowercased())
+			pastWordsCased.append(best)
+			output += "\(pastWords.count). \(best):   \(similarity)" + (guess ? " [guessed]":"")+"\n"
+		}
+		
+	}
+}

@@ -9,9 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
 	@State var output = ""
+	@State var going = false
+	@State var start = ""
+	@State var end = ""
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+		TextField("Start", text: $start).padding()
+		TextField("End", text: $end).padding()
+		Button{
+			if going {
+				going = false;
+				output = "\(start) -> \(end)"
+			} else {
+				going = true
+				wick(start: start, end: end, output: $output).begin()
+			}
+		} label:{
+			Text("Begin")
+			
+		}.padding()
+		Text(output)
     }
 }
 
