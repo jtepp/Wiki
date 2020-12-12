@@ -15,7 +15,6 @@ struct ContentView: View {
 	@State var pastWordsCased = [String]()
     var body: some View {
 		ScrollView{
-			ScrollViewReader { value in
 		HStack {
 			Text("Wiki")
 			.font(.largeTitle)
@@ -42,11 +41,9 @@ struct ContentView: View {
 		Text(output)
 			
 			ActivityIndicator(shouldAnimate: $going)
-				.onAppear {
-					value.scrollTo(pastWordsCased.count - 1, anchor: .center)
-				}
+				
 			}
-	}
+	
     }
 }
 
