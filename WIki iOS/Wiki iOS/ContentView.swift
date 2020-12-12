@@ -12,10 +12,16 @@ struct ContentView: View {
 	@State var start = ""
 	@State var end = ""
     var body: some View {
-		Text("Wiki")
+		ScrollView{
+		HStack {
+			Text("Wiki")
 			.font(.largeTitle)
 			.bold()
 			.padding()
+			Spacer()
+			
+		}
+			Spacer()
 		TextField("Start", text: $start).padding()
 		TextField("End", text: $end).padding()
 		Button{
@@ -27,6 +33,8 @@ struct ContentView: View {
 			Text("Begin")
 		}.padding()
 		Text(output)
+		
+	}
     }
 }
 
